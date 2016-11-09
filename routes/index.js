@@ -15,7 +15,7 @@ router.get('/poll',function(req,res,next) {
  //    if(err){ return next(err); }
  //    res.json(comments);
  //  });
-	res.render('poll', { title: 'Express' });
+	res.sendFile('poll.html', { root:  'public' });
 });
 
 
