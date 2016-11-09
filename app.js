@@ -24,11 +24,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
 
 // set up question routes
 var question = require("./models/questionSchema");
 var questionRouter = require('./routes/questions')(question);
-app.use("/polls", questionRouter);
+app.use("/questions", questionRouter);
 
 app.use('/', routes);
 app.use('/users', users);
