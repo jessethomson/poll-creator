@@ -1,5 +1,40 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html(lang='en', ng-app='myApp')
+	head
+		title Bootstrap Example
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		script(src='/angular/angular.min.js')
+		script(src='../javascripts/MainCtrl.js', type='text/javascript')
+	body(ng-controller='MainCtrl')
+		.jumbotron.text-center
+			img.img-responsive.center-block(src='poll.png', alt='Poll')
+			h1 Let the stats do the talking.
+			p Create a poll to get down to the bottom of it
+		.container(style='padding: 15px;')
+			.row
+				.col-md-10.col-md-offset-1
+					h2 It's this easy.
+					p Fill out the following poll details
+					form
+						.form-group
+							label(for='question') Enter a Question
+							input.form-control(type='question', ng-model='question', placeholder='What do you want for lunch tomorrow?')
+						div(style='float:right;')
+							span.btn.glyphicon.glyphicon-minus-sign(ng-click='decrementOptions()')
+							label {{ options.length }}
+							span.btn.glyphicon.glyphicon-plus-sign(ng-click='incrementOptions()')
+						label Options
+						.form-group(ng-repeat='option in options track by $index')
+							input.form-control(type='text', placeholder='Option {{$index + 1}}', ng-model='option.text')
+						button.btn.btn-default(type='submit', ng-click='createPoll()') Submit
+			.row(ng-show='shareableUrl', style='margin-top: 15px;')
+				.col-md-10.col-md-offset-1
+					label Shareable Link
+					a.form-control(ng-href='{{ shareableUrl }}', target='_blank')
+						| {{ shareableUrl }}
+					div(style='margin: 15px;')
+						| Go to 
+						a(ng-href="{{ shareableUrl + '/results'}}", target='_blank') {{ shareableUrl + "/results"}}
+							|  to see see the poll results
