@@ -8,6 +8,7 @@
   "dependencies": {
     "angular": "^1.5.8",
     "body-parser": "~1.15.1",
+    "c3": "^0.4.11",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
