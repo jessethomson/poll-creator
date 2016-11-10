@@ -89,7 +89,18 @@ app.controller("ResultsCtrl", ["$scope", "$http", "$location", function($scope, 
 		$http.get(url)
 			.then(function(response) {
 				$scope.question = response.data;
-				renderChart();
+
+				var options = $scope.question.options;
+				var barData = ['data1'];
+				var pieData = [];
+				var categories = [];
+				for(var i=0; i<options.length; i++) {
+					barData.push(options[i].count);
+					categories.push(options[i].text);
+					pieData.push([options[i].text, options[i].count]);
+				}
+				renderBarChart(barData, categories);
+				renderPieChart(pieData);
 			}, function(error) {
 				console.log(error);
 			});
@@ -97,17 +108,30 @@ app.controller("ResultsCtrl", ["$scope", "$http", "$location", function($scope, 
 	}
 	loadQuestion();
 
-	function renderChart() {
-		var options = $scope.question.options;
-		var data = ['data1'];
-		var categories = [];
-		for(var i=0; i<options.length; i++) {
-			data.push(options[i].count);
-			categories.push(options[i].text);
-		}
+	function renderPieChart(data) {
+		console.log(data);
+		var chart = c3.generate({
+		bindto: "#pollResultsPieChart",
+		   data: {
+		       // iris data from R
+		       columns: data,
+		       type : 'pie'
+		   },
+		   interaction: {
+		       enabled: false
+		   },
+		   legend: {
+		       item: {
+		           onclick: function() {}
+		       }
+		   }
+		});
+	}
+
+	function renderBarChart(data, categories) {
 
 		var chart = c3.generate({
-			bindto: "#pollResults",
+			bindto: "#pollResultsBarChart",
 			data: {
 				columns: [
 					data
