@@ -1,6 +1,7 @@
-var app = angular.module("myApp", []);
+console.log("asdfasdf")
+var app = angular.module("resultsApp", []);
 
-app.controller("PollCtrl", ["$scope", "$http", "$location", function($scope, $http, $location) {
+app.controller("ResultsCtrl", ["$scope", "$http", "$location", function($scope, $http, $location) {
 
 	var urlArray = $location.absUrl().split("/").slice(-1);
 	var questionId = urlArray[urlArray.length-1];
@@ -15,18 +16,11 @@ app.controller("PollCtrl", ["$scope", "$http", "$location", function($scope, $ht
 			});
 
 	}
-
 	loadQuestion();
 
-	$scope.optionSelected = function(option) {
-		$scope.selectedOptionId = option._id;
-		console.log($scope.selectedOptionId);
-	}
 
 	$scope.submitSurvey = function() {
-		console.log("here")
 		if($scope.selectedOptionId) {
-		console.log("here11")
 
 			var url = "/questions/" + questionId + "/options/" + $scope.selectedOptionId + "/increment";
 			$http.get(url)

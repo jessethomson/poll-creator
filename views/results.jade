@@ -1,0 +1,23 @@
+doctype html
+html(lang='en', ng-app='myApp')
+	head
+		title Poll Results
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		script(src='/angular/angular.min.js')
+		script(src="/d3/d3.min.js")
+		script(src="/c3/c3.min.js")
+		script(src='../../javascripts/myApp.js')
+	body(ng-controller='ResultsCtrl')
+		.jumbotron.text-center(style="padding: 0px 0px 10px 0px;")
+			img.img-responsive.center-block(src='../../poll.png', alt='Poll')
+			h1 Poll Question
+		.container
+			div(id="pollResults")
+			//- 	h2(style="text-align:center;") {{ question.text }}
+			//- 	form
+			//- 		.form-group(ng-repeat='option in question.options track by $index')
+			//- 			button.form-control(ng-click="optionSelected(option)")
+			//- 				| {{ option.text }}
+			//- 		button.btn.btn-default(ng-disabled="!selectedOptionId" type='submit', ng-click='submitSurvey()' style="text-align:center;") Submit
+			//- h4(ng-show="surveySubmitted" style="text-align:center;font-style:italic;") Thank you for your input

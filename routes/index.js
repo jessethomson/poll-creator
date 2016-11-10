@@ -7,7 +7,11 @@ router.get('/', function(req, res) {
 });
 
 router.get('/poll/:questionId',function(req,res) {
-	res.render('poll',{question: "hello there,,,?"});
+	res.render('poll');
+});
+
+router.get('/poll/:questionId/results',function(req,res) {
+	res.render('results');
 });
 
 module.exports = router;
